@@ -6,6 +6,7 @@ ROOT_DIR = environ.Path(__file__) - 2
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+IS_HEROKU_HOST = False
 env = environ.Env()
 env.read_env(str(ROOT_DIR.path(".env")))
 
