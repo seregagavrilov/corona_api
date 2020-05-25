@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_celery_results',
     'django_celery_beat',
+    'storages',
 ]
 
 PROJECT_APPS = [
