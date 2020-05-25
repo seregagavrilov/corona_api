@@ -1,23 +1,6 @@
 from apps.country.models import Country, CountryStatistic
 from collections import OrderedDict
 import datetime
-import pytz
-
-utc = pytz.UTC
-
-
-def create_country_latest_statistic():
-    pass
-
-
-def create_current_timeline_data(amount_type, current_timeline_data, current_country):
-    current_timeline_data = current_timeline_data.get('timeline')
-    for time, amount in current_timeline_data.items():
-        statistic, created = CountryStatistic.objects.update_or_create(
-            country=current_country,
-            last_updated=time,
-            defaults={amount_type: amount}
-        )
 
 
 class StatisticLoader:
@@ -91,7 +74,8 @@ class StatisticLoader:
         string_end_date = datetime.datetime.strftime(end_date, '%Y-%m-%dT%H:%M:%SZ')
         timelines = history.get('timeline')
         for date, entry in timelines.items():
-            if start_date < string_start_date < string_end_date:
+            # date = datetime.datetime.strftime(date, '%Y-%m-%dT%H:%M:%SZ')
+            if string_start_date < date <= string_end_date:
                 yield date, entry
 
     def update_timeline_data(self, current_indicator, current_amount, current_time):
@@ -110,51 +94,3 @@ class StatisticLoader:
                 for time, amount in self.get_latest_loaded_data(
                         current_timeline.get(indicator), latest_statistic_date, latest_confirmed_data):
                     self.update_timeline_data(indicator, amount, time)
-
-
-def create_country_statistic(data):
-    locations = data.get('locations')
-    for location in locations:
-        code = location.get('country_code')
-        if code:
-            name = location.get('country')
-            last_updated = location.get('last_updated')
-            country, created = Country.objects.get_or_create(
-                code=code,
-                defaults={'name': name},
-            )
-
-            timelines = location.get('timelines')
-            if not timelines:
-                return None
-            current_country_statistic = CountryStatistic.objects.filter(country=country)
-            if current_country_statistic:
-
-                latest_statistic = current_country_statistic.latest('last_updated')
-                current_confirmed = timelines.get('confirmed')
-                current_confirmed_timeline = current_confirmed.get('timeline')
-
-                ordd = OrderedDict(current_confirmed_timeline)
-                # currrent_datetime_last = utc.localize(
-                #     datetime.datetime.strptime(list(ordd.keys())[-1], '%Y-%m-%dT%H:%M:%SZ')
-                # )
-                currrent_datetime_last = datetime.datetime.strptime(list(ordd.keys())[-1], '%Y-%m-%dT%H:%M:%SZ')
-
-
-                # confirmed = current_confirmed.get('latest')
-                # deaths = timelines.get('deaths').get('latest')
-                # recovered = timelines.get('recovered').get('latest')
-
-                if currrent_datetime_last > latest_statistic.last_updated:
-                    for key in ['confirmed', 'deaths', 'recovered']:
-                        string_last_upd = datetime.datetime.strftime(latest_statistic.last_updated, '%Y-%m-%d %H:%M:%S')
-                        string_last_cdt = datetime.datetime.strftime(currrent_datetime_last, '%Y-%m-%dT%H:%M:%SZ')
-                        for time, amount in get_records(timelines.get(key), string_last_upd, string_last_cdt):
-                            CountryStatistic.objects.update_or_create(
-                                country=country,
-                                last_updated=time,
-                                defaults={key: amount}
-                            )
-            else:
-                for key in ['confirmed', 'deaths', 'recovered']:
-                    create_current_timeline_data(key, timelines.get(key), country)

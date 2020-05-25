@@ -3,6 +3,7 @@ from django.shortcuts import redirect, reverse
 from django.shortcuts import render
 import requests
 from rest_framework import viewsets
+from rest_framework.status import HTTP_200_OK
 from apps.country.mixins import CountyMixin
 from rest_framework.response import Response
 from apps.country.models import Country
@@ -10,8 +11,9 @@ from apps.country.api.serializers import CountrySerializer, CountryListSerialize
 from apps.country.tasks import update_virus_data
 
 
-def get_countries_data(req):
-    update_virus_data()
+# class get_countries_data(viewsets.ViewSet):
+#     update_virus_data()
+#     return Response(status=HTTP_200_OK)
 
 
 class CountryViewSet(viewsets.ModelViewSet):

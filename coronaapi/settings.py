@@ -11,7 +11,7 @@ env.read_env(str(ROOT_DIR.path(".env")))
 
 SECRET_KEY = '1g03(1a&49j93lk3b*e#xz@25v)5i=b0i+z6=8re9ftoy3e7(g'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -125,6 +125,11 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BROKER_URL = env('REDIS_URL', default='redis://localhost:6379')
+
+
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# MEDIA_ROOT = ''
 
 LANGUAGE_CODE = 'en-us'
 
