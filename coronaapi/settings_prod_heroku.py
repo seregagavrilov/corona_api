@@ -33,7 +33,7 @@ def get_cache():
 
 CACHES = get_cache()
 
-BASE_HOST = os.environ.get("BASE_HOST", "https://dev.osla.ru")
+# BASE_HOST = os.environ.get("BASE_HOST", "https://dev.osla.ru")
 
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # Important for Heroku
@@ -51,8 +51,8 @@ AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_HOST = os.environ['AWS_S3_HOST']
 AWS_S3_ENDPOINT_URL = os.environ['AWS_S3_ENDPOINT_URL']
 AWS_S3_REGION_NAME = os.environ['AWS_S3_REGION_NAME']
-# AWS_QUERYSTRING_AUTH = False
-# AWS_DEFAULT_ACL = os.environ['AWS_DEFAULT_ACL']
+AWS_QUERYSTRING_AUTH = False
+AWS_DEFAULT_ACL = os.environ['AWS_DEFAULT_ACL']
 
 # django-dbbackup
 DBBACKUP_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
