@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'rest_framework',
     'django_extensions',
@@ -78,6 +79,11 @@ TEMPLATES = [
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    # 'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
 
 STATICFILES_DIRS = [
     os.path.join(PROJECT_ROOT, "static")
@@ -141,9 +147,9 @@ CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BROKER_URL = env('REDIS_URL', default='redis://localhost:6379')
 
 
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# MEDIA_ROOT = ''
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_ROOT = ''
 
 LANGUAGE_CODE = 'en-us'
 
