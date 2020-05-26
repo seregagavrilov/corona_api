@@ -1,6 +1,6 @@
 import os
 import environ
-
+from corsheaders.defaults import default_headers
 
 ROOT_DIR = environ.Path(__file__) - 2
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -95,6 +95,11 @@ STATICFILES_DIRS = [
 WSGI_APPLICATION = 'coronaapi.wsgi.application'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_HEADERS = default_headers + (
+    'cache-control',
+    'x-entity',
+)
 
 DATABASES = {
     'default': {
