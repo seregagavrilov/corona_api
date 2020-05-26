@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django_celery_results',
     'django_celery_beat',
     'storages',
+    'corsheaders',
 ]
 
 PROJECT_APPS = [
@@ -51,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'coronaapi.urls'
@@ -91,6 +94,7 @@ STATICFILES_DIRS = [
 
 WSGI_APPLICATION = 'coronaapi.wsgi.application'
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 DATABASES = {
     'default': {
