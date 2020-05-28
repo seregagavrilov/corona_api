@@ -4,12 +4,12 @@ from django.conf import settings
 import requests
 
 
-@celery.task(bind=True)
+@celery.task(bind=True, max_retries=3)
 def update_virus_data(self):
     try:
         res = requests.get(settings.VIRUS_API_URL, params={'timelines': True}, timeout=10)
     except requests.exceptions.ReadTimeout:
-        return None
+        self.retry(countdown=3**self.request.retries)
     if res.status_code == 200:
         loader = StatisticLoader(res.json())
         loader.load_statistic()
