@@ -3,7 +3,7 @@ from django.db import models
 from apps.core.api.models import DateFields
 
 
-class Country(models.Model):
+class Country(DateFields):
     name = models.CharField(
         verbose_name='Наименование',
         max_length=255

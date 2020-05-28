@@ -19,7 +19,7 @@ class CountryStatisticAdmin(admin.ModelAdmin):
         'last_updated'
     )
     list_display_links = ('country', )
-    search_fields = ('country',)
+    search_fields = ('country__name',)
 
 
 @admin.register(Country)
@@ -27,6 +27,8 @@ class CountryAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'code',
+        'created_at',
+        'updated_at'
     )
     list_display_links = ('name', )
     search_fields = ('name', 'code')

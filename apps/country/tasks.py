@@ -6,7 +6,10 @@ import requests
 
 @celery.task(bind=True)
 def update_virus_data(self):
-    res = requests.get(settings.VIRUS_API_URL, params={'timelines': True}, timeout=10)
+    try:
+        res = requests.get(settings.VIRUS_API_URL, params={'timelines': True}, timeout=10)
+    except requests.exceptions.ReadTimeout:
+        return None
     if res.status_code == 200:
         loader = StatisticLoader(res.json())
         loader.load_statistic()

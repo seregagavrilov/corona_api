@@ -9,14 +9,13 @@ class CountryStatisticSerializer(serializers.ModelSerializer):
             'confirmed',
             'deaths',
             'recovered',
-            'created_at',
-            'updated_at'
+            'last_updated'
         )
         read_only_fields = fields
 
 
-class CountryListSerializer(serializers.ModelSerializer):
-    statistic = CountryStatisticSerializer(read_only=True)
+class CountrySerializer(serializers.ModelSerializer):
+    statistic = CountryStatisticSerializer(read_only=True, many=True)
 
     class Meta:
         model = Country
@@ -29,13 +28,10 @@ class CountryListSerializer(serializers.ModelSerializer):
         read_only_fields = fields
 
 
-class CountrySerializer(CountryListSerializer):
-    statistic = CountryStatisticSerializer(read_only=True)
-
-    class Meta:
-        model = Country
-        fields = CountryListSerializer.Meta.fields
-        read_only_fields = fields
-
-    def create(self, validated_data):
-        pass
+# class CountrySerializer(CountryListSerializer):
+#     statistic = CountryStatisticSerializer(read_only=True)
+#
+#     class Meta:
+#         model = Country
+#         fields = CountryListSerializer.Meta.fields
+#         read_only_fields = fields
