@@ -79,6 +79,9 @@ class StatisticLoader:
                 yield date, entry
 
     def update_timeline_data(self, current_indicator, current_amount, current_time):
+        print(self.current_country)
+        print(self.current_province)
+        print(current_time)
         CountryStatistic.objects.update_or_create(
             country=self.current_country,
             province=self.current_province,

@@ -17,7 +17,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 # VIRUS_API_URL = 'https://coronavirus-tracker-api.herokuapp.com/v2/locations/'
-VIRUS_API_URL = 'https://coronavirus-tracker-api.herokuapp.com/v2/locations/?timelines=true'
+VIRUS_API_URL = 'https://coronavirus-tracker-api.herokuapp.com/v2/locations/'
 
 INSTALLED_APPS = [
     'jet.dashboard',
