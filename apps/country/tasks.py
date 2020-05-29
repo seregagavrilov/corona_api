@@ -7,7 +7,7 @@ import requests
 @celery.task(bind=True, max_retries=3)
 def update_virus_data(self):
     try:
-        res = requests.get(settings.VIRUS_API_URL, params={'timelines': True}, timeout=10)
+        res = requests.get(settings.VIRUS_API_URL, params={'timelines': True}, timeout=15)
     except requests.exceptions.ReadTimeout:
         self.retry(countdown=3**self.request.retries)
     if res.status_code == 200:
