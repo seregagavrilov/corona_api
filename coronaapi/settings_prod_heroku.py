@@ -33,7 +33,6 @@ def get_cache():
 
 CACHES = get_cache()
 
-# BASE_HOST = os.environ.get("BASE_HOST", "https://dev.osla.ru")
 
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')  # Important for Heroku
@@ -47,7 +46,6 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_ROOT = ''
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-# AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_HOST = os.environ['AWS_S3_HOST']
 AWS_S3_ENDPOINT_URL = os.environ['AWS_S3_ENDPOINT_URL']
 AWS_S3_REGION_NAME = os.environ['AWS_S3_REGION_NAME']
@@ -56,13 +54,6 @@ AWS_DEFAULT_ACL = None
 
 # django-dbbackup
 DBBACKUP_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# DBBACKUP_STORAGE_OPTIONS = {
-#     'access_key': os.environ['S3_ACCESS_KEY'],
-#     'secret_key': os.environ['S3_SECRET_KEY'],
-#     'bucket_name': os.environ['S3_BUCKET_NAME'],
-#     'host':  os.environ['S3_HOST_NAME'],
-#     'default_acl':  os.environ['S3_DEFAULT_ACL']
-# }
 
 
 # celery settings
