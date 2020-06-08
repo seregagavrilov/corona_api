@@ -4,6 +4,8 @@ from django.shortcuts import render
 import requests
 from rest_framework import viewsets
 from rest_framework.status import HTTP_200_OK
+
+from apps.country.api.filters import CountryFilter
 from apps.country.mixins import CountyMixin
 from rest_framework.response import Response
 from apps.country.models import Country
@@ -20,6 +22,7 @@ def get_countries_data(r):
 class CountryStatisticViewSet(viewsets.ModelViewSet):
     queryset = Country.objects.all()
     serializer_class = CountrySerializer
+    filterset_class = CountryFilter
     # ordering = ('-created_at',)
     # lookup_url_kwarg = 'country_id'
 
