@@ -179,7 +179,7 @@ ruamel.yaml==0.15.64
 ruamel.yaml.clib==0.1.2
 Rx==1.6.1
 s3transfer==0.1.13
-sentry-sdk==0.10.2
+sentry-sdk==0.14.4
 service-identity==17.0.0
 simplejson==3.16.0
 singledispatch==3.4.0.3

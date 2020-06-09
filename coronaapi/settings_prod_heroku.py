@@ -1,5 +1,8 @@
 from .settings_prod import *
 
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
 import dj_database_url
 
 
@@ -69,4 +72,11 @@ CHANNEL_LAYERS = {
     },
 }
 
+sentry_sdk.init(
+    dsn="https://334b4050a1a34129b0e4f7a207f88214@o405160.ingest.sentry.io/5270333",
+    integrations=[DjangoIntegration()],
 
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
