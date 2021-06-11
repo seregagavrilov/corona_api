@@ -200,7 +200,7 @@ uvicorn==0.11.7
 uvloop==0.12.2
 vine==1.1.4
 websocket-client==0.54.0
-websockets==7.0
+websockets==9.1
 whitenoise==2.0.6
 wrapt==1.10.11
 xlrd==1.1.0
